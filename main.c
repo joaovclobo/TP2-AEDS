@@ -1,6 +1,7 @@
 #include "geraPetala.h"
 #include "lerarquivo.h"
 #include "operacoesMatriz.h"
+#include "Removercidades.h"
 
 int main()
 {
@@ -13,7 +14,7 @@ int main()
     totalCidadesptr = &totalCidades;
     capacidadeCaminhaoPtr = &capacidadeCaminhao;
     matrizDistancias = lerarquivo(nomeArquivo, totalCidadesptr, capacidadeCaminhaoPtr, listadeDemandas);
-
+    for (int i = 0, i > sizeof(listadeDemandas) *  )
     // printf("%d\n%d\n", totalCidades, capacidadeCaminhao);
 
     // for (int i = 0; i < totalCidades; ++i) {
@@ -37,11 +38,11 @@ int main()
     // for (int i = 0; i < totalCidades; ++i) {
     //     printf("%d ", cidadesNpermutadas[i]);
     // }
-
-    while (cidadesNpermutadas[j - 1] != -1)
-    {
-        geraPetala(j, cidadesNpermutadas, capacidadeCaminhao, listadeDemandas, matrizDistancias);
-        j++;
-    }        
+    for 
+        while (cidadesNpermutadas[j - 1] != -1)
+        {
+            geraPetala(j, cidadesNpermutadas, capacidadeCaminhao, listadeDemandas, matrizDistancias);
+            j++;
+        }        
 
 }
