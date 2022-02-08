@@ -3,53 +3,45 @@
 /* Vetor de elementos. Coloque quantos elementos
  * quiser, mas o ultimo deve ser sempre NULL. */
 
-int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, int** matrizDistancias)                                
+int* geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, int** matrizDistancias)                                
 {
-
-    /* vetor que representara cada permutacao. */
+    int menor_rota = 0;
+    int *vetor_aux, *petala = NULL;
     int *num;
-    /* quantidade de elementos do vetor. */
     int n;
-    /* tamanho de cada permutacao. */
-    /* controle de loop. */
     int i, j;
-    /* Obtem a quantidade de elementos do vetor. */
-    int *vetor_aux;
+
     n = 0;
+
     while (vetor[n] != -1)
         n++;
 
     if (r > n)
     {
         printf("Nao faz sentido r > n.\n");
-        return -1;
+        return NULL;
     }
-    /* Aloca espaco para o vetor num. Lembre-se
-     * que o vetor `num' representa um numero
-     * na base n com r algarismos. */
+    
     num = (int *)calloc(r + 1, sizeof(int));
-    vetor_aux = (int *)calloc(r + 1, sizeof(int));
+    vetor_aux = (int *)calloc(r, sizeof(int));
 
     if (num == NULL)
     {
         perror("malloc");
-        return -1;
+        return NULL;
     }
 
     if (vetor_aux == NULL)
     {
         perror("malloc");
-        return -1;
+        return NULL;
     }
 
-    /* Inicio do algoritmo. */
     while (num[r] == 0)
     {
         for (i = 0; i < n; i++)
         {
-            /* Mostra a permutacao na tela se
-             * e somente se `num' nao contem
-             * algarismos repetidos. */
+
             if (confereRepeticao(num, r))
             {
                 for (j = 0; j < r; j++)
@@ -57,23 +49,38 @@ int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, 
                     // printf("%d ", vetor[num[j]]);
                     vetor_aux[j] = vetor[num[j]];
                 }
+
+                // for (j = 0; j < r; j++)
+                // {
+                //         printf("%d", vetor_aux[j]);
+                // }
                 // putchar('\n');
+
                 if (calcdemandas(vetor_aux, listadeDemandas, r, capacidadeCaminhao))
                 {
-                    printf("Demanda OK! - ");
-                    for (j = 0; j < r; j++)
+                    // printf("Demanda ok - ");
+                    // for (j = 0; j < r; j++)
+                    // {
+                    //     printf("%d ", vetor_aux[j]);
+                    // }
+
+                    if (menor_rota == 0)
                     {
-                        printf("%d ", vetor_aux[j]);
+                        menor_rota = calcrota(vetor_aux, matrizDistancias, r);
+                        // printf("\nDistancia rota: %d", calcrota(vetor_aux, matrizDistancias, r));
+                    } else if (calcrota(vetor_aux, matrizDistancias, r) < menor_rota)
+                    {
+                        menor_rota = calcrota(vetor_aux, matrizDistancias, r);
+                        petala = vetor_aux;
+                        // printf("\nDistancia rota: %d", calcrota(vetor_aux, matrizDistancias, r));
                     }
-                    // printf(" - Distancia rota: %d", calcrota(vetor_aux, matrizDistancias, r));
-                    putchar('\n');
+                    // putchar('\n');
                 }
             }
-            /* incrementa o algarismo menos
-             * significativo. */
+
             num[0]++;
         }
-        /* distribui os vai-uns. */
+
         for (i = 0; i < r; i++)
         {
             if (num[i] == n)
@@ -83,9 +90,10 @@ int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, 
             }
         }
     }
+    // printf("\n%d", menor_rota);
     free(num);
-    free(vetor_aux);
-    return 0;
+    printf("%d", menor_rota);
+    return petala;
 }
 
 char confereRepeticao(int *num, int r)
@@ -122,62 +130,27 @@ int calcdemandas(int *petalapossivel, int *demandas, int r, int Demanda_Caminhao
     }
 }
 
-int calcrota(int *petalapossivel, int **matriz_distancias, int r)
+int calcrota(int *petalapossivel, int **matrizDistancias, int r)
 {
-    int Total = 0, j = 0, atual = 1;
+    int Total = 0, j = 0;
 
-    printf("\n");
-    // for (int i = 0; i < r; i++)
-    // {
-        // if (i == 0)
-        // {
-        //     Total += matriz_distancias[0][petalapossivel[0]];
+    while(j < r){
 
-        // } else if (i == r-1){
-        //     Total += matriz_distancias[petalapossivel[r-1]][0];
+        if (j == 0)
+        {
+            Total += matrizDistancias[0][petalapossivel[j]];
+        }
 
-        // } else{
-        //     Total += matriz_distancias[petalapossivel[i]][petalapossivel[i+1]];
-        // }
-
-    //     printf("Total: %d\n", Total);
-    // }
-
-    while(j != r-1){
-
-        // if (i == 0)
-        // {
-        //     Total += matriz_distancias[0][petalapossivel[0]];
-
-        // } else if (i == r-1){
-        //     Total += matriz_distancias[petalapossivel[r-1]][0];
-
-        // } else{
-        //     Total += matriz_distancias[petalapossivel[i]][petalapossivel[i+1]];
-        // }
-        j++;
+        if (j == r-1){
+            Total += matrizDistancias[petalapossivel[r-1]][0];
+            break;
+        } 
+        
+        if (j != 0 || j != r-1){
+            Total += matrizDistancias[petalapossivel[j]][petalapossivel[j+1]];
+            j++;
+        }
     }
 
-    printf("\n");
     return Total;
 }
-
-//     int *demanda_caminhoes = (int*) malloc(n_caminhoes*sizeof(int));
-
-//    int j = 0;
-    
-//     for (int i = 0; i < n_caminhoes; i++){
-        
-//         while (j < n_cidades+n_caminhoes) {
-
-//             soma += matriz[petala[j]][petala[j+1]];
-//             j++;
-
-//             if (petala [j] == 0){
-//                 break;
-//             }
-//         }
-
-//         demanda[i] = soma;
-//         soma = 0;
-//     }

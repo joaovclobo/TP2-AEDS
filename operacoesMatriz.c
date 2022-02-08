@@ -12,7 +12,6 @@ void preencheMatriz(int linha,int coluna,int valor, int** matriz){
     matriz[linha][coluna] = valor;
     matriz[coluna][linha] = valor;
 }
-
 int** criamatriz(int N){
     int **matriz;
     matriz = (int **)calloc(N, sizeof(int *));
