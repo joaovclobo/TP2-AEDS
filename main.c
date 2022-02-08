@@ -9,23 +9,22 @@ int main()
     int *totalCidadesptr, *capacidadeCaminhaoPtr,  **matrizDistancias;
     int totalCidades, capacidadeCaminhao;
     int listadeDemandas[1000];
+    int *cidadesNaoPerm, j = 1;
     
     totalCidadesptr = &totalCidades;
     capacidadeCaminhaoPtr = &capacidadeCaminhao;
     matrizDistancias = lerarquivo(nomeArquivo, totalCidadesptr, capacidadeCaminhaoPtr, listadeDemandas);
 
-    int *cidadesNpermutadas, j = 1;
-
-    cidadesNpermutadas = (int*) malloc(totalCidades*sizeof(int));
+    cidadesNaoPerm = (int*) malloc(totalCidades*sizeof(int));
 
     for (int i = 1; i < totalCidades; i++){
-        cidadesNpermutadas[i-1] = i;
+        cidadesNaoPerm[i-1] = i;
     }
-    cidadesNpermutadas[totalCidades-1] = -1;
+    cidadesNaoPerm[totalCidades-1] = -1;
 
-    while (cidadesNpermutadas[j - 1] != -1)
+    while (cidadesNaoPerm[j - 1] != -1)
     {
-        geraPetala(j, cidadesNpermutadas, capacidadeCaminhao, listadeDemandas, matrizDistancias);
+        geraPetala(j, cidadesNaoPerm, capacidadeCaminhao, listadeDemandas, matrizDistancias);
         j++;
     }        
 
