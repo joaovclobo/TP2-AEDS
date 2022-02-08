@@ -40,7 +40,7 @@ int main()
 
     while (cidadesNpermutadas[j - 1] != -1)
     {
-        geraPetala(j, cidadesNpermutadas);
+        geraPetala(j, cidadesNpermutadas, capacidadeCaminhao, listadeDemandas);
         j++;
     }        
 

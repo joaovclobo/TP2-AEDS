@@ -2,10 +2,7 @@
 /* Vetor de elementos. Coloque quantos elementos
  * quiser, mas o ultimo deve ser sempre NULL. */
 
-int demandas[] = {0, 10, 23, 27, 40, 30, 12, 80, 61, 19};
-int Demanda_Caminhao = 80;
-
-int geraPetala(int r, int* vetor)                                
+int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas)                                
 {
     /* vetor que representara cada permutacao. */
     int *num;
@@ -50,7 +47,7 @@ int geraPetala(int r, int* vetor)
                     vetor_aux[j] = vetor[num[j]];
                 }
                 // putchar('\n');
-                if (calcdemandas(vetor_aux, demandas, r, Demanda_Caminhao))
+                if (calcdemandas(vetor_aux, capacidadeCaminhao, r, listadeDemandas))
                 {
                     printf("Demanda OK! - ");
                     for (j = 0; j < r; j++)
