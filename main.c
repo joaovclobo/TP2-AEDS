@@ -14,7 +14,7 @@ int main()
     capacidadeCaminhaoPtr = &capacidadeCaminhao;
     matrizDistancias = lerarquivo(nomeArquivo, totalCidadesptr, capacidadeCaminhaoPtr, listadeDemandas);
 
-    printf("%d\n%d\n", totalCidades, capacidadeCaminhao);
+    // printf("%d\n%d\n", totalCidades, capacidadeCaminhao);
 
     // for (int i = 0; i < totalCidades; ++i) {
     //     printf("%d ", listadeDemandas[i]);
@@ -22,7 +22,7 @@ int main()
 
     // printf("\n");
 
-    imprimeMatriz(totalCidades, matrizDistancias);
+    // imprimeMatriz(totalCidades, matrizDistancias);
 
     int *cidadesNpermutadas, j = 1;
 
@@ -40,7 +40,7 @@ int main()
 
     while (cidadesNpermutadas[j - 1] != -1)
     {
-        geraPetala(j, cidadesNpermutadas, capacidadeCaminhao, listadeDemandas);
+        geraPetala(j, cidadesNpermutadas, capacidadeCaminhao, listadeDemandas, matrizDistancias);
         j++;
     }        
 

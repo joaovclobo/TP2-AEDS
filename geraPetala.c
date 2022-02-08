@@ -1,9 +1,11 @@
 #include "geraPetala.h"
+#include "operacoesMatriz.h"
 /* Vetor de elementos. Coloque quantos elementos
  * quiser, mas o ultimo deve ser sempre NULL. */
 
-int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas)                                
+int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, int** matrizDistancias)                                
 {
+
     /* vetor que representara cada permutacao. */
     int *num;
     /* quantidade de elementos do vetor. */
@@ -47,7 +49,7 @@ int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas)
                     vetor_aux[j] = vetor[num[j]];
                 }
                 // putchar('\n');
-                if (calcdemandas(vetor_aux, capacidadeCaminhao, r, listadeDemandas))
+                if (calcdemandas(vetor_aux, listadeDemandas, r, capacidadeCaminhao))
                 {
                     printf("Demanda OK! - ");
                     for (j = 0; j < r; j++)
