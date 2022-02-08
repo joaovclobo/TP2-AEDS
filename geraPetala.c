@@ -1,5 +1,5 @@
 #include "geraPetala.h"
-#include "operacoesMatriz.h"
+
 /* Vetor de elementos. Coloque quantos elementos
  * quiser, mas o ultimo deve ser sempre NULL. */
 
@@ -14,7 +14,7 @@ int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, 
     /* controle de loop. */
     int i, j;
     /* Obtem a quantidade de elementos do vetor. */
-    int vetor_aux[r];                                   //usar memoria dinamica
+    int *vetor_aux;
     n = 0;
     while (vetor[n] != -1)
         n++;
@@ -28,11 +28,20 @@ int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, 
      * que o vetor `num' representa um numero
      * na base n com r algarismos. */
     num = (int *)calloc(r + 1, sizeof(int));
+    vetor_aux = (int *)calloc(r + 1, sizeof(int));
+
     if (num == NULL)
     {
         perror("malloc");
         return -1;
     }
+
+    if (vetor_aux == NULL)
+    {
+        perror("malloc");
+        return -1;
+    }
+
     /* Inicio do algoritmo. */
     while (num[r] == 0)
     {
@@ -56,6 +65,7 @@ int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, 
                     {
                         printf("%d ", vetor_aux[j]);
                     }
+                    printf(" - Distancia rota: %d", calcrota(vetor_aux, matrizDistancias, r));
                     putchar('\n');
                 }
             }
@@ -77,6 +87,23 @@ int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, 
     return 0;
 }
 
+char confereRepeticao(int *num, int r)
+{
+    int i, j;
+
+    for (i = 0; i < r; i++)
+    {
+        for (j = 0; j < r && i != j; j++)
+        {
+            if (num[i] == num[j])
+            {
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
 int calcdemandas(int *petalapossivel, int *demandas, int r, int Demanda_Caminhao)
 {
     int Total = 0;
@@ -94,19 +121,18 @@ int calcdemandas(int *petalapossivel, int *demandas, int r, int Demanda_Caminhao
     }
 }
 
-char confereRepeticao(int *num, int r)
+int calcrota(int *petalapossivel, int **matriz_distancias, int r)
 {
-    int i, j;
-
-    for (i = 0; i < r; i++)
+    int Total = 0;
+    for (int i = 0; i < r; i++)
     {
-        for (j = 0; j < r && i != j; j++)
+        if (i == 0)
         {
-            if (num[i] == num[j])
-            {
-                return 0;
-            }
+            Total += matriz_distancias[0][petalapossivel[0]];
+        } else if (i==r-1){
+            Total += matriz_distancias[petalapossivel[r-1]][0];
         }
+        Total += matriz_distancias[petalapossivel[i]][petalapossivel[i+1]];
     }
-    return 1;
+    return Total;
 }
