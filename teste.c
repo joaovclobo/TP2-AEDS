@@ -16,6 +16,5 @@ int main(){
 
     printf("\n");
 
-    imprimeMatriz(N, matrizDistancias);
-
+    imprimeMatriz(N, N, matrizDistancias);
 }

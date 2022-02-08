@@ -12,6 +12,7 @@ int main()
     int listadeDemandas[1000];
     int *cidadesNaoPerm, j = 1;
     int Qtdcaminhoes = 0, Tamanho_Vetor_Cidade;
+    int **MatrizdePetalas;
     
     totalCidadesptr = &totalCidades;
     capacidadeCaminhaoPtr = &capacidadeCaminhao;
@@ -27,13 +28,13 @@ int main()
     }
     cidadesNaoPerm[totalCidades-1] = -1;
     Tamanho_Vetor_Cidade = totalCidades - 1;
+    MatrizdePetalas = criamatriz(Qtdcaminhoes, 100);
     for (int i = 0; i < Qtdcaminhoes; i++){
         while (cidadesNaoPerm[j - 1] != -1)
         {
             geraPetala(j, cidadesNaoPerm, capacidadeCaminhao, listadeDemandas, matrizDistancias);
-            j++;
         }
-        cidadesNaoPerm = RemoveCidades(cidadesNaoPerm, petala_atual, Tamanho_Vetor_Cidade, CalcularTamanhoPetala(petala_atual));     
+        cidadesNaoPerm = RemoveCidades(cidadesNaoPerm, MatrizdePetalas[i], Tamanho_Vetor_Cidade, CalcularTamanhoPetala(MatrizdePetalas[i]));     
         Tamanho_Vetor_Cidade = CalcularTamanhoVetorCidade(cidadesNaoPerm);
     }
 }
