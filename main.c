@@ -10,39 +10,23 @@ int main()
     int *totalCidadesptr, *capacidadeCaminhaoPtr,  **matrizDistancias;
     int totalCidades, capacidadeCaminhao;
     int listadeDemandas[1000];
+    int *cidadesNaoPerm, j = 1;
     
     totalCidadesptr = &totalCidades;
     capacidadeCaminhaoPtr = &capacidadeCaminhao;
     matrizDistancias = lerarquivo(nomeArquivo, totalCidadesptr, capacidadeCaminhaoPtr, listadeDemandas);
-    for (int i = 0, i > sizeof(listadeDemandas) *  )
-    // printf("%d\n%d\n", totalCidades, capacidadeCaminhao);
 
-    // for (int i = 0; i < totalCidades; ++i) {
-    //     printf("%d ", listadeDemandas[i]);
-    // }
-
-    // printf("\n");
-
-    // imprimeMatriz(totalCidades, matrizDistancias);
-
-    int *cidadesNpermutadas, j = 1;
-
-    cidadesNpermutadas = (int*) malloc(totalCidades*sizeof(int));
+    cidadesNaoPerm = (int*) malloc(totalCidades*sizeof(int));
 
     for (int i = 1; i < totalCidades; i++){
-        cidadesNpermutadas[i-1] = i;
+        cidadesNaoPerm[i-1] = i;
     }
+    cidadesNaoPerm[totalCidades-1] = -1;
 
-    cidadesNpermutadas[totalCidades-1] = -1;
-
-    // for (int i = 0; i < totalCidades; ++i) {
-    //     printf("%d ", cidadesNpermutadas[i]);
-    // }
-    for 
-        while (cidadesNpermutadas[j - 1] != -1)
-        {
-            geraPetala(j, cidadesNpermutadas, capacidadeCaminhao, listadeDemandas, matrizDistancias);
-            j++;
-        }        
+    while (cidadesNaoPerm[j - 1] != -1)
+    {
+        geraPetala(j, cidadesNaoPerm, capacidadeCaminhao, listadeDemandas, matrizDistancias);
+        j++;
+    }        
 
 }

@@ -65,7 +65,7 @@ int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, 
                     {
                         printf("%d ", vetor_aux[j]);
                     }
-                    printf(" - Distancia rota: %d", calcrota(vetor_aux, matrizDistancias, r));
+                    // printf(" - Distancia rota: %d", calcrota(vetor_aux, matrizDistancias, r));
                     putchar('\n');
                 }
             }
@@ -84,6 +84,7 @@ int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, 
         }
     }
     free(num);
+    free(vetor_aux);
     return 0;
 }
 
@@ -123,16 +124,60 @@ int calcdemandas(int *petalapossivel, int *demandas, int r, int Demanda_Caminhao
 
 int calcrota(int *petalapossivel, int **matriz_distancias, int r)
 {
-    int Total = 0;
-    for (int i = 0; i < r; i++)
-    {
-        if (i == 0)
-        {
-            Total += matriz_distancias[0][petalapossivel[0]];
-        } else if (i==r-1){
-            Total += matriz_distancias[petalapossivel[r-1]][0];
-        }
-        Total += matriz_distancias[petalapossivel[i]][petalapossivel[i+1]];
+    int Total = 0, j = 0, atual = 1;
+
+    printf("\n");
+    // for (int i = 0; i < r; i++)
+    // {
+        // if (i == 0)
+        // {
+        //     Total += matriz_distancias[0][petalapossivel[0]];
+
+        // } else if (i == r-1){
+        //     Total += matriz_distancias[petalapossivel[r-1]][0];
+
+        // } else{
+        //     Total += matriz_distancias[petalapossivel[i]][petalapossivel[i+1]];
+        // }
+
+    //     printf("Total: %d\n", Total);
+    // }
+
+    while(j != r-1){
+
+        // if (i == 0)
+        // {
+        //     Total += matriz_distancias[0][petalapossivel[0]];
+
+        // } else if (i == r-1){
+        //     Total += matriz_distancias[petalapossivel[r-1]][0];
+
+        // } else{
+        //     Total += matriz_distancias[petalapossivel[i]][petalapossivel[i+1]];
+        // }
+        j++;
     }
+
+    printf("\n");
     return Total;
 }
+
+//     int *demanda_caminhoes = (int*) malloc(n_caminhoes*sizeof(int));
+
+//    int j = 0;
+    
+//     for (int i = 0; i < n_caminhoes; i++){
+        
+//         while (j < n_cidades+n_caminhoes) {
+
+//             soma += matriz[petala[j]][petala[j+1]];
+//             j++;
+
+//             if (petala [j] == 0){
+//                 break;
+//             }
+//         }
+
+//         demanda[i] = soma;
+//         soma = 0;
+//     }
