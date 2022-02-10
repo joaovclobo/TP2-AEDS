@@ -7,6 +7,7 @@ int** lerarquivo(char nomeArquivo[20], int *ponteiroQuantCidades, int *capacidad
     ponteiroArquivo = fopen(nomeArquivo, "r");
     if (ponteiroArquivo != NULL){
         fscanf(ponteiroArquivo, "%d", ponteiroQuantCidades);
+        *ponteiroQuantCidades = *ponteiroQuantCidades - 1;
         ponteiroMatriz = criamatriz(*ponteiroQuantCidades, *ponteiroQuantCidades);
         fscanf(ponteiroArquivo, "%d", capacidadeCaminhao);
         fgets(demandas, 10, ponteiroArquivo);
@@ -20,8 +21,11 @@ int** lerarquivo(char nomeArquivo[20], int *ponteiroQuantCidades, int *capacidad
             }
             *(listaDemandas + i) = atoi(temp);
         }    
-        for (int i = 0; i < *ponteiroQuantCidades * *ponteiroQuantCidades; i++){
+        for (int i = 0; i < (*ponteiroQuantCidades * *ponteiroQuantCidades) ; i++){
             fgets(auxdistancias, 20, ponteiroArquivo);
+            if(auxdistancias[1] == '\000'){
+                break;
+            }
             linha = atoi(strtok(auxdistancias, " "));
             coluna = atoi(strtok(NULL, " "));
             valor = atoi(strtok(NULL, " "));

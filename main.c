@@ -66,12 +66,18 @@ int main()
 
     }
 
-        printf("\nCidades restantes ERRADAS:\n");
+    printf("\nCidades restantes ERRADAS:\n");
 
-        for (j = 0; j < Tamanho_Vetor_Cidade; j++)
-        {
-            printf("%d ", cidadesNaoPerm[j]);
+    for (j = 0; j < Tamanho_Vetor_Cidade; j++)
+    {
+        printf("%d ", cidadesNaoPerm[j]);
+    }
+    for (int i = 0; i < Qtdcaminhoes ;i++){
+        for (int j = 0; j < CalcularTamanhoPetala(MatrizdePetalas[i]);j++){
+            printf("%d ", MatrizdePetalas[i][j]);
         }
+        putchar('\n');
+    }
 
     clock_t tempo_final = clock();
     double tempo_diferenca = (double)(tempo_final - tempo_inicial) / CLOCKS_PER_SEC;
