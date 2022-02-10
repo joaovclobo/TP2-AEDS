@@ -2,9 +2,12 @@
 #include "lerarquivo.h"
 #include "operacoesMatriz.h"
 #include "Removercidades.h"
+#include <time.h>
 
 int main()
 {
+    clock_t tempo_inicial = clock();
+
     char nomeArquivo[50] = "teste10.txt";
 
     int *totalCidadesptr, *capacidadeCaminhaoPtr, **matrizDistancias;
@@ -32,7 +35,7 @@ int main()
     }
     cidadesNaoPerm[totalCidades-1] = -1;
     
-    Tamanho_Vetor_Cidade = totalCidades - 1;
+    Tamanho_Vetor_Cidade = totalCidades;
     MatrizdePetalas = criamatriz(Qtdcaminhoes, 100);
 
     for (int i = 0; i < Qtdcaminhoes; i++){
@@ -43,8 +46,13 @@ int main()
         }
         menorRota = 0;
         j = 0;      
-        
+
         cidadesNaoPerm = RemoveCidades(cidadesNaoPerm, MatrizdePetalas[i], Tamanho_Vetor_Cidade, CalcularTamanhoPetala(MatrizdePetalas[i]));     
         Tamanho_Vetor_Cidade = CalcularTamanhoVetorCidade(cidadesNaoPerm);
     }
+
+    clock_t tempo_final = clock();
+    double tempo_diferenca = (double)(tempo_final - tempo_inicial) / CLOCKS_PER_SEC;
+    printf("Tempo de execucao: %lf segundos\n\n",tempo_diferenca);
+
 }
