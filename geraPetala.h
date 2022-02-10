@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int* geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, int** matrizDistancias);
+int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, int** matrizDistancias, int* menorRota, int** petala);
 
 char confereRepeticao(int *num, int r);
 

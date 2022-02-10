@@ -3,10 +3,10 @@
 /* Vetor de elementos. Coloque quantos elementos
  * quiser, mas o ultimo deve ser sempre NULL. */
 
-int* geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, int** matrizDistancias)                                
+int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, int** matrizDistancias, int* menorRota, int** petala)                                
 {
-    int menor_rota = 0;
-    int *vetor_aux, *petala = NULL;
+    int menorRotaTemp = *menorRota;
+    int *vetor_aux;
     int *num;
     int n;
     int i, j;
@@ -19,7 +19,7 @@ int* geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas,
     if (r > n)
     {
         printf("Nao faz sentido r > n.\n");
-        return NULL;
+        return -1;
     }
     
     num = (int *)calloc(r + 1, sizeof(int));
@@ -28,13 +28,13 @@ int* geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas,
     if (num == NULL)
     {
         perror("malloc");
-        return NULL;
+        return -1;
     }
 
     if (vetor_aux == NULL)
     {
         perror("malloc");
-        return NULL;
+        return -1;
     }
 
     while (num[r] == 0)
@@ -46,35 +46,40 @@ int* geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas,
             {
                 for (j = 0; j < r; j++)
                 {
-                    // printf("%d ", vetor[num[j]]);
                     vetor_aux[j] = vetor[num[j]];
                 }
-
-                // for (j = 0; j < r; j++)
-                // {
-                //         printf("%d", vetor_aux[j]);
-                // }
-                // putchar('\n');
 
                 if (calcdemandas(vetor_aux, listadeDemandas, r, capacidadeCaminhao))
                 {
                     // printf("Demanda ok - ");
-                    // for (j = 0; j < r; j++)
-                    // {
-                    //     printf("%d ", vetor_aux[j]);
-                    // }
-
-                    if (menor_rota == 0)
-                    {
-                        menor_rota = calcrota(vetor_aux, matrizDistancias, r);
-                        // printf("\nDistancia rota: %d", calcrota(vetor_aux, matrizDistancias, r));
-                    } else if (calcrota(vetor_aux, matrizDistancias, r) < menor_rota)
-                    {
-                        menor_rota = calcrota(vetor_aux, matrizDistancias, r);
-                        petala = vetor_aux;
-                        // printf("\nDistancia rota: %d", calcrota(vetor_aux, matrizDistancias, r));
-                    }
+                    // for (j = 0; j < r; j++){
+                    //     printf("%d ", vetor_aux[j]);}
                     // putchar('\n');
+
+                    if (menorRotaTemp == 0)
+                    {
+                        menorRotaTemp = calcrota(vetor_aux, matrizDistancias, r);
+                        printf("Menor demanda - R: %d - %d - ", r, calcrota(vetor_aux, matrizDistancias, r));
+                        for (j = 0; j < r; j++)
+                        {
+                            printf("%d ", vetor_aux[j]);
+                        }
+                        putchar('\n');
+                    } else if (calcrota(vetor_aux, matrizDistancias, r) < menorRotaTemp)
+                    {
+                        menorRotaTemp = calcrota(vetor_aux, matrizDistancias, r);
+                        printf("Menor demanda - R: %d - %d - ", r, calcrota(vetor_aux, matrizDistancias, r));
+                        for (j = 0; j < r; j++)
+                        {
+                            printf("%d ", vetor_aux[j]);
+                        }
+                        putchar('\n');
+                        for (int j = 0; j < r; j++)
+                        {
+                            (*petala)[j+1] = vetor_aux[j];
+                        }
+                        (*petala)[r+2] = -1;
+                    }
                 }
             }
 
@@ -90,10 +95,12 @@ int* geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas,
             }
         }
     }
-    // printf("\n%d", menor_rota);
+
     free(num);
-    printf("%d", menor_rota);
-    return petala;
+    // printf("\nMenor Rota: %d\n", menorRotaTemp);
+    *menorRota = menorRotaTemp;
+    
+    return 1;
 }
 
 char confereRepeticao(int *num, int r)
