@@ -1,8 +1,5 @@
 #include "geraPetala.h"
 
-/* Vetor de elementos. Coloque quantos elementos
- * quiser, mas o ultimo deve ser sempre NULL. */
-
 int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, int** matrizDistancias, int* menorRota, int** petala)                                
 {
     int menorRotaTemp = *menorRota;
@@ -22,8 +19,8 @@ int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, 
         return -1;
     }
     
-    num = (int *)calloc(r + 1, sizeof(int));
-    vetor_aux = (int *)calloc(r, sizeof(int));
+    num = (int*)calloc(r + 1, sizeof(int));
+    vetor_aux = (int*)calloc(r, sizeof(int));
 
     if (num == NULL)
     {
@@ -51,10 +48,6 @@ int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, 
 
                 if (calcdemandas(vetor_aux, listadeDemandas, r, capacidadeCaminhao))
                 {
-                    // printf("Demanda ok - ");
-                    // for (j = 0; j < r; j++){
-                    //     printf("%d ", vetor_aux[j]);}
-                    // putchar('\n');
 
                     if (menorRotaTemp == 0)
                     {
@@ -96,8 +89,8 @@ int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, 
         }
     }
 
+    free(vetor_aux);
     free(num);
-    // printf("\nMenor Rota: %d\n", menorRotaTemp);
     *menorRota = menorRotaTemp;
     
     return 1;
