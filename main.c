@@ -8,7 +8,7 @@ int main()
 {
     clock_t tempo_inicial = clock();
 
-    char nomeArquivo[50] = "teste-8-cidades.txt";
+    char nomeArquivo[50] = "teste1.txt";
 
     int *totalCidadesptr, *capacidadeCaminhaoPtr, **matrizDistancias;
     int totalCidades, capacidadeCaminhao;

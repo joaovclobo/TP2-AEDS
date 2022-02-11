@@ -12,7 +12,6 @@ int ContidoVetor(int Cidade, int *Petala, int TamanhoPetala){
     int output = 0;
     for (int i = 1; i < TamanhoPetala - 1; i++){ /* i = -1 e Tamanho Petala -1 é para que não precise checar os valores da petala que são 0*/
         if (Petala[i] == Cidade){
-            printf("%d %d", Cidade, Petala[i]);
             output = 1;
             break;
         }
