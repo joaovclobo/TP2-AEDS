@@ -8,29 +8,41 @@ int CalcularTamanhoPetala(int *petala){
     return i + 1; /*i + 1 para adicionar o ultimo zero */
 }
 
-int ContidoVetor(int Cidade, int *Petala, int TamanhoPetala){
-    int output = 0;
-    for (int i = 1; i < TamanhoPetala - 1; i++){ /* i = -1 e Tamanho Petala -1 é para que não precise checar os valores da petala que são 0*/
+int ContidoVetor(int Cidade, int *Petala){
+    int output = 0, i = 0;
+
+    while (Petala[i] != -1)
+    {
         if (Petala[i] == Cidade){
             output = 1;
             break;
         }
+        i++;
     }
     return output;
 }
 
-int* RemoveCidades(int *Vetor_cidades,int *petala_atual, int Tamanho_Vetor_Cidade,int TamanhoPetala){
-    int *NovoVetor, IndiceNovoVetor = 0;
-    NovoVetor = (int* ) calloc(Tamanho_Vetor_Cidade - TamanhoPetala + 3, sizeof(int)); /* Novo vetor terá o tamanho do Vetor Cidade diminuido das cidades presente na petala que não são 0 como 0 aparece duas vezes temos que somar 2*/
-    for (int IndiceVetorCidade = 0; IndiceVetorCidade < Tamanho_Vetor_Cidade; IndiceVetorCidade++){
-        if (!(ContidoVetor(Vetor_cidades[IndiceVetorCidade], petala_atual, TamanhoPetala))){
-            NovoVetor[IndiceNovoVetor] = Vetor_cidades[IndiceVetorCidade];
-            IndiceNovoVetor++; 
-        } 
+void RemoveCidades(int** vetorCidades, int* petalaAtual, int totalCidades){
+    int i = 0, contaNovovetor = 0;
+    int *novoVetor;
+
+    novoVetor = (int*) calloc(totalCidades, sizeof(int));
+
+    while ((*vetorCidades)[i] != -1)
+    {
+        if (!ContidoVetor((*vetorCidades)[i], petalaAtual))
+        {
+            novoVetor[contaNovovetor] = (*vetorCidades)[i];
+            contaNovovetor++;
+        }
+        i++;
     }
-    NovoVetor[Tamanho_Vetor_Cidade - 1] = -1;
-    free(Vetor_cidades);
-    return NovoVetor;
+    novoVetor[contaNovovetor] = -1;
+
+    for (int j = 0; j <= contaNovovetor; j++)
+    {
+        (*vetorCidades)[j] = novoVetor[j];
+    }
 }
 
 int CalcularTamanhoVetorCidade(int* Vetor_N){

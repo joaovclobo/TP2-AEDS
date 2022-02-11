@@ -6,22 +6,25 @@
 
 int main()
 {
+    putchar('\n');
     clock_t tempo_inicial = clock();
-
-    char nomeArquivo[50] = "teste-10-cidades-grupo.txt";
+    
+    char nomeArquivo[50] = "teste-4-cidades.txt";
 
     int *totalCidadesptr, *capacidadeCaminhaoPtr, **matrizDistancias;
     int totalCidades, capacidadeCaminhao;
     int listadeDemandas[1000];
     int QntdCaminhoes = 0, TamanhoVetorCidade;
-    int *cidadesNaoPerm, menorRota = 0, j = 1;
+    int *cidadesNaoPerm, menorRota = 0, j = 1, k = 0;
     int **MatrizdePetalas;
+    int *petala1;
     
     totalCidadesptr = &totalCidades;
     capacidadeCaminhaoPtr = &capacidadeCaminhao;
     matrizDistancias = lerarquivo(nomeArquivo, totalCidadesptr, capacidadeCaminhaoPtr, listadeDemandas);
 
     cidadesNaoPerm = (int*) malloc(totalCidades*sizeof(int));
+    petala1 = (int*) calloc(((totalCidades-1)*2)+1, sizeof(int));
 
     for (int i = 0; i < totalCidades; i++){
         QntdCaminhoes += listadeDemandas[i];
@@ -33,29 +36,48 @@ int main()
     }
     cidadesNaoPerm[totalCidades-1] = -1;
 
-    TamanhoVetorCidade = totalCidades - 1;
-    MatrizdePetalas = criamatriz(QntdCaminhoes, 100);
+    TamanhoVetorCidade = totalCidades;
+    MatrizdePetalas = criamatriz(QntdCaminhoes+10, ((totalCidades-1)*2)+1);
 
     for (int i = 0; i < QntdCaminhoes; i++){
 
         while (cidadesNaoPerm[j - 1] != -1)
         {
-            geraPetala(j, cidadesNaoPerm, capacidadeCaminhao, listadeDemandas, matrizDistancias, &menorRota, &MatrizdePetalas[i]);
+            geraPetala(j, cidadesNaoPerm, capacidadeCaminhao, listadeDemandas, matrizDistancias, &menorRota, &petala1);
             j++;
         }
-        
-        cidadesNaoPerm = RemoveCidades(cidadesNaoPerm, MatrizdePetalas[i], TamanhoVetorCidade, CalcularTamanhoPetala(MatrizdePetalas[i]));
-        TamanhoVetorCidade = CalcularTamanhoVetorCidade(cidadesNaoPerm);
+
+        while (petala1[k] != -1)
+        {
+            MatrizdePetalas[i][k] = petala1[k];
+            k++;
+        }
+        MatrizdePetalas[i][k] = -1;
         menorRota = 0;
         j = 0;
-    }
+        k = 0;      
 
+        RemoveCidades(&cidadesNaoPerm, petala1, totalCidades);  
+    }
+    
+    printf("\n");
     for (int i = 0; i < QntdCaminhoes ;i++){
-        for (int j = 0; j < CalcularTamanhoPetala(MatrizdePetalas[i]);j++){
+        j = 0;
+        while (MatrizdePetalas[i][j] != -1){
             printf("%d ", MatrizdePetalas[i][j]);
+            j++;
         }
         putchar('\n');
     }
+
+    printf("\nCidades nao atendiadas:\n");
+    j = 0;
+    while (cidadesNaoPerm[j] != -1)
+    {
+        printf("%d ", cidadesNaoPerm[j]);
+        j++;
+    }
+    printf("\n\n");
 
     clock_t tempo_final = clock();
     double tempo_diferenca = (double)(tempo_final - tempo_inicial) / CLOCKS_PER_SEC;

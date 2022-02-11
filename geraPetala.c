@@ -52,31 +52,39 @@ int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, 
                     if (menorRotaTemp == 0)
                     {
                         menorRotaTemp = calcrota(vetor_aux, matrizDistancias, r);
-                        printf("Menor demanda - R: %d - %d - ", r, calcrota(vetor_aux, matrizDistancias, r));
-                        for (j = 0; j < r; j++)
+                        printf("Menor demanda - Dist: %d - %d - Cidades: ", r, menorRotaTemp);
+                       
+                        for (int j = 0; j < r; j++)
                         {
                             printf("%d ", vetor_aux[j]);
                         }
                         putchar('\n');
+                        
                         for (int j = 0; j < r; j++)
                         {
                             (*petala)[j+1] = vetor_aux[j];
                         }
-                        (*petala)[r+2] = -1;
+                        (*petala)[j+1] = 0;
+                        (*petala)[j+2] = -1;
+
                     } else if (calcrota(vetor_aux, matrizDistancias, r) < menorRotaTemp)
                     {
                         menorRotaTemp = calcrota(vetor_aux, matrizDistancias, r);
-                        printf("Menor demanda - R: %d - %d - ", r, calcrota(vetor_aux, matrizDistancias, r));
-                        for (j = 0; j < r; j++)
+                        printf("Menor demanda - Dist: %d - %d - Cidades: ", r, menorRotaTemp);
+
+                        for (int j = 0; j < r; j++)
                         {
                             printf("%d ", vetor_aux[j]);
                         }
                         putchar('\n');
+
                         for (int j = 0; j < r; j++)
                         {
                             (*petala)[j+1] = vetor_aux[j];
+
                         }
-                        (*petala)[r+2] = -1;
+                        (*petala)[j+1] = 0;
+                        (*petala)[j+2] = -1;
                     }
                 }
             }

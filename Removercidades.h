@@ -2,6 +2,6 @@
 #include <stdlib.h>
 
 int CalcularTamanhoPetala(int *petala);
-int* RemoveCidades(int *Vetor_cidades,int *petala_atual, int Tamanho_Vetor_Cidade,int TamanhoPetala);
+void RemoveCidades(int** vetorCidades, int* petalaAtual, int totalCidades);
 int CalcularTamanhoVetorCidade(int* Vetor_N);
-int ContidoVetor(int Cidade, int *Petala, int TamanhoPetala);
+int ContidoVetor(int Cidade, int *Petala);
