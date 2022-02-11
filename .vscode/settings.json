@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "funcoespermutacao.h": "c"
+        "funcoespermutacao.h": "c",
+        "operacoesmatriz.h": "c"
     }
 }
