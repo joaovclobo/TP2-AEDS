@@ -20,7 +20,7 @@ int** lerarquivo(char nomeArquivo[20], int *ponteiroQuantCidades, int *capacidad
             }
             *(listaDemandas + i) = atoi(temp);
         }    
-        for (int i = 0; i < *ponteiroQuantCidades * *ponteiroQuantCidades; i++){
+        for (int i = 0; i < (*ponteiroQuantCidades * *ponteiroQuantCidades) ; i++){
             fgets(auxdistancias, 20, ponteiroArquivo);
             if (auxdistancias[1] == '\000'){
                 break;

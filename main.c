@@ -2,10 +2,13 @@
 #include "lerarquivo.h"
 #include "operacoesMatriz.h"
 #include "Removercidades.h"
+#include <time.h>
 
 int main()
 {
-    char nomeArquivo[50] = "teste1.txt";
+    clock_t tempo_inicial = clock();
+
+    char nomeArquivo[50] = "teste-8-cidades.txt";
 
     int *totalCidadesptr, *capacidadeCaminhaoPtr, **matrizDistancias;
     int totalCidades, capacidadeCaminhao;
@@ -28,6 +31,11 @@ int main()
     for (int i = 1; i < totalCidades; i++){
         cidadesNaoPerm[i-1] = i;
     }
+
+     for (int i = 0; i < totalCidades; i++){
+        QntdCaminhoes += listadeDemandas[i];
+    }
+    QntdCaminhoes /= capacidadeCaminhao;
 
     for (int i = 1; i < totalCidades; i++){
         cidadesNaoPerm[i-1] = i;
@@ -52,4 +60,9 @@ int main()
         }
         putchar('\n');
     }
+
+    clock_t tempo_final = clock();
+    double tempo_diferenca = (double)(tempo_final - tempo_inicial) / CLOCKS_PER_SEC;
+    printf("Tempo de execucao: %lf segundos\n\n",tempo_diferenca);
+
 }
