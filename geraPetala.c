@@ -58,6 +58,11 @@ int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, 
                             printf("%d ", vetor_aux[j]);
                         }
                         putchar('\n');
+                        for (int j = 0; j < r; j++)
+                        {
+                            (*petala)[j+1] = vetor_aux[j];
+                        }
+                        (*petala)[r+2] = -1;
                     } else if (calcrota(vetor_aux, matrizDistancias, r) < menorRotaTemp)
                     {
                         menorRotaTemp = calcrota(vetor_aux, matrizDistancias, r);
