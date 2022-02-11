@@ -20,19 +20,19 @@ int ContidoVetor(int Cidade, int *Petala, int TamanhoPetala){
     return output;
 }
 
-int* RemoveCidades(int *Vetor_cidades,int *petala_atual, int Tamanho_Vetor_Cidade,int TamanhoPetala){
-    int *NovoVetor, IndiceNovoVetor = 0;
-    NovoVetor = (int* ) calloc(Tamanho_Vetor_Cidade - TamanhoPetala + 3, sizeof(int)); /* Novo vetor terá o tamanho do Vetor Cidade diminuido das cidades presente na petala que não são 0 como 0 aparece duas vezes temos que somar 2*/
-    for (int IndiceVetorCidade = 0; IndiceVetorCidade < Tamanho_Vetor_Cidade; IndiceVetorCidade++){
-        if (!(ContidoVetor(Vetor_cidades[IndiceVetorCidade], petala_atual, TamanhoPetala))){
-            NovoVetor[IndiceNovoVetor] = Vetor_cidades[IndiceVetorCidade];
-            IndiceNovoVetor++; 
-        }
-    }
-    NovoVetor[Tamanho_Vetor_Cidade - 1] = -1;
-    free(Vetor_cidades);
-    return NovoVetor;
-}
+// int RemoveCidades(int *Vetor_cidades,int *petala_atual, int Tamanho_Vetor_Cidade,int TamanhoPetala){
+//     int *NovoVetor, IndiceNovoVetor = 0;
+//     NovoVetor = (int* ) calloc(Tamanho_Vetor_Cidade - TamanhoPetala + 3, sizeof(int)); /* Novo vetor terá o tamanho do Vetor Cidade diminuido das cidades presente na petala que não são 0 como 0 aparece duas vezes temos que somar 2*/
+//     for (int IndiceVetorCidade = 0; IndiceVetorCidade < Tamanho_Vetor_Cidade; IndiceVetorCidade++){
+//         if (!(ContidoVetor(Vetor_cidades[IndiceVetorCidade], petala_atual, TamanhoPetala))){
+//             NovoVetor[IndiceNovoVetor] = Vetor_cidades[IndiceVetorCidade];
+//             IndiceNovoVetor++; 
+//         }
+//     }
+//     NovoVetor[Tamanho_Vetor_Cidade - 1] = -1;
+//     free(Vetor_cidades);
+//     return NovoVetor;
+// }
 
 int CalcularTamanhoVetorCidade(int* Vetor_N){
     int i = 0;
