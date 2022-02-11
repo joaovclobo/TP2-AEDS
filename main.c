@@ -9,7 +9,7 @@ int main()
     putchar('\n');
     clock_t tempo_inicial = clock();
     
-    char nomeArquivo[50] = "teste-4-cidades.txt";
+    char nomeArquivo[50] = "teste-3-cidades.txt";
 
     int *totalCidadesptr, *capacidadeCaminhaoPtr, **matrizDistancias;
     int totalCidades, capacidadeCaminhao;
@@ -37,7 +37,7 @@ int main()
     cidadesNaoPerm[totalCidades-1] = -1;
 
     TamanhoVetorCidade = totalCidades;
-    MatrizdePetalas = criamatriz(QntdCaminhoes+10, ((totalCidades-1)*2)+1);
+    MatrizdePetalas = criamatriz(QntdCaminhoes, ((totalCidades-1)*2)+1);
 
     for (int i = 0; i < QntdCaminhoes; i++){
 

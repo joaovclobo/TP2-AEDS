@@ -52,7 +52,7 @@ int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, 
                     if (menorRotaTemp == 0)
                     {
                         menorRotaTemp = calcrota(vetor_aux, matrizDistancias, r);
-                        printf("Menor demanda - Dist: %d - %d - Cidades: ", r, menorRotaTemp);
+                        printf("Menor demanda - Distancia: %d - Cidades: ", menorRotaTemp);
                        
                         for (int j = 0; j < r; j++)
                         {
@@ -70,7 +70,7 @@ int geraPetala(int r, int* vetor, int capacidadeCaminhao, int* listadeDemandas, 
                     } else if (calcrota(vetor_aux, matrizDistancias, r) < menorRotaTemp)
                     {
                         menorRotaTemp = calcrota(vetor_aux, matrizDistancias, r);
-                        printf("Menor demanda - Dist: %d - %d - Cidades: ", r, menorRotaTemp);
+                        printf("Menor demanda - Distancia: %d - Cidades: ", menorRotaTemp);
 
                         for (int j = 0; j < r; j++)
                         {
