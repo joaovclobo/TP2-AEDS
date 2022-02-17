@@ -8,7 +8,7 @@ int main()
 {
     putchar('\n');
     char nomeArquivo[50];
-    scanf("%s", &nomeArquivo);
+    scanf("%s", nomeArquivo);
     clock_t tempo_inicial = clock();
     
     // char nomeArquivo[50] = "teste-4-cidades.txt";
@@ -24,7 +24,9 @@ int main()
     totalCidadesptr = &totalCidades;
     capacidadeCaminhaoPtr = &capacidadeCaminhao;
     matrizDistancias = lerarquivo(nomeArquivo, totalCidadesptr, capacidadeCaminhaoPtr, listadeDemandas);
-
+    if (matrizDistancias == NULL){
+        return 0;
+    }
     cidadesNaoPerm = (int*) malloc(totalCidades*sizeof(int));
     petala1 = (int*) calloc(((totalCidades-1)*2)+1, sizeof(int));
 
